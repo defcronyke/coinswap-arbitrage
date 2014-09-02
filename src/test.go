@@ -23,18 +23,20 @@ func get_content() {
     
 
 
-    type marketStats struct {
-        Marketid string `json:"marketid,omitempty"`
-        Symbol string `json:"symbol,omitempty"`
-        Exchange string `json:"exchange,omitempty"`
-        Lastprice string `json:"lastprice,omitempty"`
-        Dayvolume string `json:"dayvolume,omitempty"`
-        Dayhigh string `json:"dayhigh,omitempty"`
-        Daylow string `json:"daylow,omitempty"`
-        Ask string `json:"ask,omitempty"`
-        Bid string `json:"bid,omitempty"`
-        Openorders string `json:"openorders,omitempty"`
-    }
+//    type marketStats struct {
+//        Marketid string `json:"marketid,omitempty"`
+//        Symbol string `json:"symbol,omitempty"`
+//        Exchange string `json:"exchange,omitempty"`
+//        Lastprice string `json:"lastprice,omitempty"`
+//        Dayvolume string `json:"dayvolume,omitempty"`
+//        Dayhigh string `json:"dayhigh,omitempty"`
+//        Daylow string `json:"daylow,omitempty"`
+//        Ask string `json:"ask,omitempty"`
+//        Bid string `json:"bid,omitempty"`
+//        Openorders string `json:"openorders,omitempty"`
+//    }
+
+	var marketStats interface{}
 
 
     // Request the url data
@@ -53,13 +55,15 @@ func get_content() {
         fmt.Printf("%s",apiError)
     }
 
-    var jsonData marketStats
-    err := json.Unmarshal(apiResponse, &jsonData)
+    //var jsonData marketStats
+    err := json.Unmarshal(apiResponse, &marketStats)
     if err != nil {
         fmt.Printf("Error: %v\n", err)
     }
     // Print json data to screen
-    fmt.Printf("Results: %v\n", jsonData.Marketid)
+    
+    stats_map := marketStats.(map[string]interface{})
+    fmt.Printf("Results: %v\n", stats_map["marketid"])
 
     }
 

@@ -21,7 +21,7 @@ func get_content() {
 
     // Request the url data
     urlResponse, urlError := client.Get(url)
-
+    
     // If there was an error:
     if urlError != nil {
             fmt.Printf("%s",urlError)
