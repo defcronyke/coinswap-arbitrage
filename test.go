@@ -18,16 +18,16 @@ func get_content() {
 
 
     type marketStats struct {
-        marketid string
-        symbol string
-        exchange string
-        lastprice string
-        dayvolume string
-        dayhigh string
-        daylow string
-        ask string
-        bid string
-        openorders string
+        Marketid string `json:"marketid"`
+        Symbol string `json:"symbol"`
+        Exchange string `json:"exchange"`
+        Lastprice string `json:"lastprice"`
+        Dayvolume string `json:"dayvolume"`
+        Dayhigh string `json:"dayhigh"`
+        Daylow string `json:"daylow"`
+        Ask string `json:"ask"`
+        Bid string `json:"bid"`
+        Openorders string `json:"openorders"`
     }
 
 
@@ -44,14 +44,16 @@ func get_content() {
     urlResponse.Body.Close() // Close the url request
 
     if apiError != nil {
-            fmt.Printf("%s",urlError)
+        fmt.Printf("%s",apiError)
     }
 
-    //apiDecoder := json.NewDecoder(strings.NewReader(apiResponse))
-    var jsonData []marketStats
-
-    apiDecoder := json.Unmarshal(apiResponse, &jsonData)
-    fmt.Printf("Results: %v\n", apiDecoder)
+    var jsonData marketStats
+    err := json.Unmarshal(apiResponse, &jsonData)
+    if err != nil {
+        fmt.Printf("Error: %v\n", err)
+    }
+    // Print json data to screen
+    fmt.Printf("Results: %v\n", jsonData)
 
     }
 
