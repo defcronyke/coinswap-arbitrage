@@ -53,7 +53,7 @@ func get_content() {
         fmt.Printf("Error: %v\n", err)
     }
     // Print json data to screen
-    fmt.Printf("Results: %v\n", jsonData)
+    fmt.Printf("Results: %v\n", jsonData.Marketid)
 
     }
 
