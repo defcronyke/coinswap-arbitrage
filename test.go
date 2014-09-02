@@ -2,37 +2,43 @@ package main
 
 import (
     "net/http"
-    //"io"
     "io/ioutil"
     "fmt"
     "encoding/json"
-    //"log"
-    //"strings"
+    "crypto/tls"
 )
+
+
 
 // https://api.coin-swap.net/market/stats/DOGE/BTC
 
 func get_content() {
+    tr := &http.Transport{
+            TLSClientConfig: &tls.Config{InsecureSkipVerify : true},
+    }
+    client := &http.Client{Transport: tr}
     // api url that responds with json data
     url := "https://api.coin-swap.net/market/stats/DOGE/BTC"
+    //url := "https://api.coin-swap.net/market/summary"
+    
 
 
     type marketStats struct {
-        Marketid string `json:"marketid"`
-        Symbol string `json:"symbol"`
-        Exchange string `json:"exchange"`
-        Lastprice string `json:"lastprice"`
-        Dayvolume string `json:"dayvolume"`
-        Dayhigh string `json:"dayhigh"`
-        Daylow string `json:"daylow"`
-        Ask string `json:"ask"`
-        Bid string `json:"bid"`
-        Openorders string `json:"openorders"`
+        Marketid string `json:"marketid,omitempty"`
+        Symbol string `json:"symbol,omitempty"`
+        Exchange string `json:"exchange,omitempty"`
+        Lastprice string `json:"lastprice,omitempty"`
+        Dayvolume string `json:"dayvolume,omitempty"`
+        Dayhigh string `json:"dayhigh,omitempty"`
+        Daylow string `json:"daylow,omitempty"`
+        Ask string `json:"ask,omitempty"`
+        Bid string `json:"bid,omitempty"`
+        Openorders string `json:"openorders,omitempty"`
     }
 
 
     // Request the url data
-    urlResponse, urlError := http.Get(url)
+    urlResponse, urlError := client.Get(url)
 
     // If there was an error:
     if urlError != nil {
