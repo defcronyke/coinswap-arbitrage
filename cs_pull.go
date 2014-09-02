@@ -18,24 +18,8 @@ func get_content() {
     }
     client := &http.Client{Transport: tr}
     // api url that responds with json data
-    url := "https://api.coin-swap.net/market/stats/DOGE/BTC"
-    //url := "https://api.coin-swap.net/market/summary"
-    
-
-
-    type marketStats struct {
-        Marketid string `json:"marketid,omitempty"`
-        Symbol string `json:"symbol,omitempty"`
-        Exchange string `json:"exchange,omitempty"`
-        Lastprice string `json:"lastprice,omitempty"`
-        Dayvolume string `json:"dayvolume,omitempty"`
-        Dayhigh string `json:"dayhigh,omitempty"`
-        Daylow string `json:"daylow,omitempty"`
-        Ask string `json:"ask,omitempty"`
-        Bid string `json:"bid,omitempty"`
-        Openorders string `json:"openorders,omitempty"`
-    }
-
+    //url := "https://api.coin-swap.net/market/stats/DOGE/BTC"
+    url := "https://api.coin-swap.net/market/summary"
 
     // Request the url data
     urlResponse, urlError := client.Get(url)
@@ -45,7 +29,6 @@ func get_content() {
             fmt.Printf("%s",urlError)
     }
 
-    // 
     apiResponse,apiError := ioutil.ReadAll(urlResponse.Body)
     urlResponse.Body.Close() // Close the url request
 
@@ -53,13 +36,15 @@ func get_content() {
         fmt.Printf("%s",apiError)
     }
 
-    var jsonData marketStats
-    err := json.Unmarshal(apiResponse, &jsonData)
+    var marketStats interface{}
+    err := json.Unmarshal(apiResponse, &marketStats)
     if err != nil {
         fmt.Printf("Error: %v\n", err)
     }
     // Print json data to screen
-    fmt.Printf("Results: %v\n", jsonData.Marketid)
+    stats_map := marketStats.(map[string]interface{})
+    
+    fmt.Printf("Results: %v\n", stats_map["symbol"])
 
     }
 
