@@ -5,7 +5,7 @@ import (
     //"./poloniex"
     //"./bittrex"
     //"./mintpal"
-    "coinswap"
+    "exchanges/coinswap"
 )
 
 
