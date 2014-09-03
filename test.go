@@ -12,7 +12,10 @@ func main() {
     bittrex_data := Get_bittrex()
     mintpal_data := Get_mintpal()
     
-    test := Compare(coinswap_data,mintpal_data)
+    _ := Compare(coinswap_data,poloniex_data)
+    _ := Compare(coinswap_data,bittrex_data)
+    _ := Compare(coinswap_data,mintpal_data)
+    
     
 /*
     fmt.Printf("Coin-Swap: %v\n", coinswap_data)
