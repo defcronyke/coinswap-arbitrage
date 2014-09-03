@@ -6,13 +6,16 @@ import (
     "fmt"
     "encoding/json"
     "crypto/tls"
+    "./poloniex"
+    "./bittrex"
+    "./mintpal"
 )
 
 
 
 // https://api.coin-swap.net/market/stats/DOGE/BTC
 
-func get_content() {
+func get_content() {	// TODO: Make this return a map[string]float64 where the key is the market name and the value is the top ask price.
     tr := &http.Transport{
             TLSClientConfig: &tls.Config{InsecureSkipVerify : true},
     }
@@ -53,16 +56,22 @@ func get_content() {
     	case []interface{}:				// if type is an array.
     		stats := marketStats.([]interface{})
     		
-    		fmt.Printf("Results:\n")
-    		for _,v := range stats {
-    			fmt.Printf("%v\n", v)    
-    		}
+//    		fmt.Printf("Coin-Swap:\n")
+//    		for _,v := range stats {
+//    			fmt.Printf("%v\n", v)    
+//    		}
     		
+    		fmt.Printf("Coin-Swap: %v", stats)
     }
-
-
 }
 
 func main() {
-    get_content()
+    get_content()	// Coin-Swap data
+    poloniex_data := poloniex.Get_content()
+    bittrex_data := bittrex.Get_content()
+    mintpal_data := mintpal.Get_content()
+    
+    fmt.Printf("Poloniex: %v\n", poloniex_data)
+    fmt.Printf("Bittrex: %v\n", bittrex_data)
+    fmt.Printf("Mintpal: %v\n", mintpal_data)
 }
