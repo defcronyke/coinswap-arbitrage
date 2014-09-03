@@ -6,6 +6,7 @@ import (
     "fmt"
     "encoding/json"
     "crypto/tls"
+    "strconv"
 )
 
 // returns the golang equivalent of { "market_name": ask_price, ... }
@@ -47,13 +48,13 @@ func Get_coinswap() map[string]float64 {		// Has to start with a capital leter b
         case map[string]interface{}:	// If json response type is a map with string keys.
         	stats := marketStats.(map[string]interface{})
                 marketname := stats["symbol"].(string) + "-" + stats["exchange"].(string)
-                return_data[marketname] = stats["ask"].(float64)	// Add a market_name -> ask_price pair to the map that we're returning.
+                return_data[marketname] = strconv.ParseFloat(stats["ask"].(string), 64)	// Add a market_name -> ask_price pair to the map that we're returning.
     	case []interface{}:             // if type is an array.
     		rows := marketStats.([]interface{})
     		for _,v := range rows {
                     stats := v.(map[string]interface{})
                     marketname := stats["symbol"].(string) + "-" + stats["exchange"].(string)
-                    return_data[marketname] = stats["ask"].(float64)	// Add a market_name -> ask_price pair to the map that we're returning.
+                    return_data[marketname] = strconv.ParseFloat(stats["ask"].(string), 64)	// Add a market_name -> ask_price pair to the map that we're returning.
     		}
     }
     return return_data
