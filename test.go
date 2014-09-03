@@ -28,4 +28,5 @@ func Compare(coinswap,exchange map[string]float64) int {
             fmt.Printf("Matching market: %v\n", market)
         }
     }
+    return 1;
 }
