@@ -2,15 +2,12 @@ package main
 
 import (
     "fmt"
-    //"./poloniex"
-    //"./bittrex"
-    //"./mintpal"
-    "exchanges/coinswap"
+
 )
 
 
 func main() {
-    coinswap_data := coinswap.Get_content()
+    coinswap_data := Get_coinswap()
     //poloniex_data := poloniex.Get_content()
     //bittrex_data := bittrex.Get_content()
     //mintpal_data := mintpal.Get_content()
