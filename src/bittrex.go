@@ -47,7 +47,6 @@ func get_content() map[string]float64 {
 
 	for _, v := range markets {
 	    market_data := v.(map[string]interface{})
-	    fmt.Printf("")		// Why the fuck do I need this??
 	    return_data[market_data["MarketName"].(string)] = market_data["Ask"].(float64)
 	}
 	
