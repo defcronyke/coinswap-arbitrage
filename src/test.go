@@ -53,9 +53,9 @@ func get_content() {
     	case []interface{}:				// if type is an array.
     		stats := marketStats.([]interface{})
     		
-    		fmt.Printf("Results: ")
+    		fmt.Printf("Results:\n")
     		for _,v := range stats {
-    			fmt.Printf("\n%s", v)    
+    			fmt.Printf("%v\n", v)    
     		}
     		
     }
