@@ -18,8 +18,11 @@ func get_content() {
     }
     client := &http.Client{Transport: tr}
     // api url that responds with json data
-    //url := "https://api.coin-swap.net/market/stats/DOGE/BTC"
-    url := "https://api.coin-swap.net/market/summary"
+    url := "https://api.coin-swap.net/market/stats/DOGE/BTC"
+    //url := "https://api.coin-swap.net/market/summary"
+    
+	var marketStats interface{}
+
 
     // Request the url data
     urlResponse, urlError := client.Get(url)
@@ -29,6 +32,7 @@ func get_content() {
             fmt.Printf("%s",urlError)
     }
 
+    // 
     apiResponse,apiError := ioutil.ReadAll(urlResponse.Body)
     urlResponse.Body.Close() // Close the url request
 
@@ -36,17 +40,28 @@ func get_content() {
         fmt.Printf("%s",apiError)
     }
 
-    var marketStats interface{}
     err := json.Unmarshal(apiResponse, &marketStats)
     if err != nil {
         fmt.Printf("Error: %v\n", err)
     }
-    // Print json data to screen
-    stats_map := marketStats.(map[string]interface{})
     
-    fmt.Printf("Results: %v\n", stats_map["symbol"])
-
+    // Print json data to screen
+    switch marketStats.(type) {
+        case map[string]interface{}:	// If json response type is a map with string keys.
+        	stats := marketStats.(map[string]interface{})
+    		fmt.Printf("Results: %v\n", stats["marketid"])
+    	case []interface{}:				// if type is an array.
+    		stats := marketStats.([]interface{})
+    		
+    		fmt.Printf("Results: ")
+    		for _,v := range stats {
+    			fmt.Printf("\n%s", v)    
+    		}
+    		
     }
+
+
+}
 
 func main() {
     get_content()
