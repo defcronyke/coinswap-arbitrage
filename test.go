@@ -2,6 +2,7 @@ package main
 
 import (
     "fmt"
+    "strconv"
 
 )
 
@@ -31,6 +32,7 @@ func Compare(coinswap,exchange map[string]float64) int {
     for market,price := range coinswap {
         if market,ok := exchange[market]; ok {
             fmt.Printf("Matching market: %v\n", market)
+            price = strconv.ParseFloat(price.(string), 64)
             if price < exchange[market] {
                 fmt.Printf("Arbitrage available: %v\n", market)
             }
