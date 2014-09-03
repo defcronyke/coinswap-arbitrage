@@ -50,7 +50,7 @@ func Get_mintpal() map[string]float64 {
 
 	for _, v := range stats_array {	// For each market.
 	    market_data := v.(map[string]interface{})
-	    return_data[market_data["exchange"].(string)+"-"+market_data["code"].(string)], _ = strconv.ParseFloat(market_data["top_ask"].(string), 64)	// Mintpal prices are strings, so we make them into floats.
+	    return_data[market_data["exchange"].(string)+"-"+market_data["code"].(string)], _ = strconv.ParseFloat(market_data["top_bid"].(string), 64)	// Mintpal prices are strings, so we make them into floats.
 	}
 	
 	return return_data
