@@ -25,7 +25,7 @@ func main() {
 func Compare(coinswap,exchange map[string]float64) int {
     for market,price := range coinswap {
         if market,ok := exchange[market]; ok {
-            fmt.Printf("Matching market: %v\n", coinswap_data)
+            fmt.Printf("Matching market: %v\n", market)
         }
     }
 }
