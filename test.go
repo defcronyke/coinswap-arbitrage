@@ -15,7 +15,8 @@ func main() {
     a := Compare(coinswap_data,poloniex_data)
     b := Compare(coinswap_data,bittrex_data)
     c := Compare(coinswap_data,mintpal_data)
-    _ := a + b + c
+    _ = a,b,c
+
     
     
 /*
