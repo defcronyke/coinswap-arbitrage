@@ -45,8 +45,6 @@ func Get_bittrex() map[string]float64 {		// Has to start with a capital leter be
 	return_data := map[string]float64{}
 	return_data = make(map[string]float64)
 
-	if marketStats != nil {
-
 		switch marketStats.(type) {
 		    case map[string]interface{}:
 
@@ -54,9 +52,12 @@ func Get_bittrex() map[string]float64 {		// Has to start with a capital leter be
 				    market_data := v.(map[string]interface{})
 			    	return_data[market_data["MarketName"].(string)] = market_data["Bid"].(float64)	// Add a market_name -> ask_price pair to the map that we're returning.
 		    	}
-
+			
+			case nil:
+				// do nothing
+				
 		}
-	}
+	
 
 	return return_data
 
