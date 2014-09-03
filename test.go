@@ -8,9 +8,9 @@ import (
 
 func main() {
     coinswap_data := Get_coinswap()
-    poloniex_data := poloniex.Get_content()
-    bittrex_data := bittrex.Get_content()
-    mintpal_data := mintpal.Get_content()
+    poloniex_data := Get_poloniex()
+    bittrex_data := Get_bittrex()
+    mintpal_data := Get_mintpal()
 
     fmt.Printf("Coin-Swap: %v\n", coinswap_data)
     fmt.Printf("Poloniex: %v\n", poloniex_data)
