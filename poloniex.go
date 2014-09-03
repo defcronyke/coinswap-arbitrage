@@ -11,7 +11,7 @@ import (
 )
 
 // returns the golang equivalent of { "market_name": ask_price, ... }
-func Get_poloneix() map[string]float64 {
+func Get_poloniex() map[string]float64 {
     tr := &http.Transport{
             TLSClientConfig: &tls.Config{InsecureSkipVerify : true},
     }
@@ -55,11 +55,3 @@ func Get_poloneix() map[string]float64 {
 	return return_data
 }
 
-//func main() {
-//    poloniex_data := get_content()
-//    
-//    for k, v := range poloniex_data {
-//        fmt.Printf("%v: %.8f\n", k, v)
-//    }
-//    
-//}

@@ -55,12 +55,3 @@ func Get_mintpal() map[string]float64 {
 	
 	return return_data
 }
-
-//func main() {
-//    mintpal_data := get_content()
-//    
-//    for k, v := range mintpal_data {
-//        fmt.Printf("%v: %.8f\n", k, v)
-//    }
-//    
-//}

@@ -21,7 +21,7 @@ func Get_bittrex() map[string]float64 {		// Has to start with a capital leter be
 
     // Request the url data
     urlResponse, urlError := client.Get(url)
-    
+
     // If there was an error:
     if urlError != nil {
             fmt.Printf("%s",urlError)
@@ -38,35 +38,26 @@ func Get_bittrex() map[string]float64 {		// Has to start with a capital leter be
     if err != nil {
         fmt.Printf("Error: %v\n", err)
     }
-    
+
     stats_map := marketStats.(map[string]interface{})
 	markets := stats_map["result"].([]interface{})
 
 	return_data := map[string]float64{}
 	return_data = make(map[string]float64)
 
-	if marketStats != nil { 
+	if marketStats != nil {
 
 		switch marketStats.(type) {
 		    case map[string]interface{}:
-	    	
+
 				for _, v := range markets {		// For each market.
 				    market_data := v.(map[string]interface{})
 			    	return_data[market_data["MarketName"].(string)] = market_data["Ask"].(float64)	// Add a market_name -> ask_price pair to the map that we're returning.
 		    	}
-				
+
 		}
 	}
 
 	return return_data
 
 }
-
-//func main() {
-//    bittrex_data := get_content()
-//    
-//    for k, v := range bittrex_data {
-//        fmt.Printf("%v: %.8f\n", k, v)
-//    }
-//    
-//}

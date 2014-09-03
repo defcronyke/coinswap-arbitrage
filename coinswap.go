@@ -51,8 +51,9 @@ func Get_coinswap() map[string]float64 {		// Has to start with a capital leter b
     	case []interface{}:             // if type is an array.
     		stats := marketStats.([]interface{})
     		for _,v := range stats {
-                    marketname := v["symbol"].(string) + "-" + v["exchange"].(string)
-                    return_data[marketname] = v["ask"].(float64)	// Add a market_name -> ask_price pair to the map that we're returning.
+                    stats := v.(map[string]interface{})
+                    marketname := stats["symbol"].(string) + "-" + stats["exchange"].(string)
+                    return_data[marketname] = stats["ask"].(float64)	// Add a market_name -> ask_price pair to the map that we're returning.
     		}
     }
     return return_data
