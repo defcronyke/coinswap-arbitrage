@@ -45,9 +45,9 @@ func get_content() map[string]float64 {
 	return_data := map[string]float64{}
 	return_data = make(map[string]float64)
 
-	for _, v := range markets {
+	for _, v := range markets {		// For each market.
 	    market_data := v.(map[string]interface{})
-	    return_data[market_data["MarketName"].(string)] = market_data["Ask"].(float64)
+	    return_data[market_data["MarketName"].(string)] = market_data["Ask"].(float64)	// Add a market_name -> ask_price pair to the map that we're returning.
 	}
 	
 	return return_data
