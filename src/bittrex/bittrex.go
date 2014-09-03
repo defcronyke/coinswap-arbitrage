@@ -45,13 +45,17 @@ func Get_content() map[string]float64 {		// Has to start with a capital leter be
 	return_data := map[string]float64{}
 	return_data = make(map[string]float64)
 
-	switch marketStats.(type) {
-	    case map[string]interface{}:
-    		
-			for _, v := range markets {		// For each market.
-			    market_data := v.(map[string]interface{})
-			    return_data[market_data["MarketName"].(string)] = market_data["Ask"].(float64)	// Add a market_name -> ask_price pair to the map that we're returning.
-			}
+	if marketStats != nil { 
+
+		switch marketStats.(type) {
+		    case map[string]interface{}:
+	    	
+				for _, v := range markets {		// For each market.
+				    market_data := v.(map[string]interface{})
+			    	return_data[market_data["MarketName"].(string)] = market_data["Ask"].(float64)	// Add a market_name -> ask_price pair to the map that we're returning.
+		    	}
+				
+		}
 	}
 
 	return return_data
