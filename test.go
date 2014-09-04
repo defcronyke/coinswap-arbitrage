@@ -10,11 +10,12 @@ func main() {
     poloniex_data := Get_poloniex()
     bittrex_data := Get_bittrex()
     mintpal_data := Get_mintpal()
+    cryptsy_data := Get_cryptsy()
     
     _ = Compare(coinswap_data,poloniex_data)
     _ = Compare(coinswap_data,bittrex_data)
     _ = Compare(coinswap_data,mintpal_data)
-
+	_ = Compare(coinswap_data,cryptsy_data)
 
     
     

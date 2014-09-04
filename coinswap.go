@@ -10,7 +10,7 @@ import (
 )
 
 // returns the golang equivalent of { "market_name": ask_price, ... }
-func Get_coinswap() map[string]float64 {		// Has to start with a capital leter because we are exporting it.
+func Get_coinswap() map[string]float64 {
     tr := &http.Transport{
             TLSClientConfig: &tls.Config{InsecureSkipVerify : true},
     }
@@ -52,7 +52,9 @@ func Get_coinswap() map[string]float64 {		// Has to start with a capital leter b
     	case []interface{}:             // if type is an array.
     		rows := marketStats.([]interface{})
     		for _,v := range rows {
-                    stats := v.(map[string]interface{})       
+
+                    stats := v.(map[string]interface{})
+
                     if stats["exchange"] != nil && stats["symbol"] != nil && stats["ask"] != nil {
                     	marketname := stats["exchange"].(string) + "-" + stats["symbol"].(string)
                     	return_data[marketname], _ = strconv.ParseFloat(stats["ask"].(string), 64)	// Add a market_name -> ask_price pair to the map that we're returning.
@@ -60,4 +62,5 @@ func Get_coinswap() map[string]float64 {		// Has to start with a capital leter b
     		}
     }
     return return_data
+
 }
