@@ -47,11 +47,19 @@ func Get_mintpal() map[string]float64 {
     
 	return_data := map[string]float64{}
 	return_data = make(map[string]float64)
-
-	for _, v := range stats_array {	// For each market.
-	    market_data := v.(map[string]interface{})
-	    return_data[market_data["exchange"].(string)+"-"+market_data["code"].(string)], _ = strconv.ParseFloat(market_data["top_bid"].(string), 64)	// Mintpal prices are strings, so we make them into floats.
-	}
 	
+	switch marketStats.(type) {
+	    case map[string]interface{}:
+
+			for _, v := range stats_array {	// For each market.
+			    market_data := v.(map[string]interface{})
+			    
+			    if market_data["exchange"] != nil && market_data["code"] != nil && market_data["top_bid"] != nil {
+			    	return_data[market_data["exchange"].(string)+"-"+market_data["code"].(string)], _ = strconv.ParseFloat(market_data["top_bid"].(string), 64)	// Mintpal prices are strings, so we make them into floats.
+		    	}
+			}
+			
+		case nil:
+	}
 	return return_data
 }

@@ -52,7 +52,10 @@ func Get_poloniex() map[string]float64 {
 				    market_data := v.(map[string]interface{})
 				    
 				    k = strings.Replace(k, "_", "-", -1)	// Poloniex uses BTC_DOGE format for market names, but we want BTC-DOGE.
-				    return_data[k], _ = strconv.ParseFloat(market_data["highestBid"].(string), 64)	// Poloniex prices are strings, so we need to make them into floats.
+				    
+				    if market_data["highestBid"] != nil {
+				    	return_data[k], _ = strconv.ParseFloat(market_data["highestBid"].(string), 64)	// Poloniex prices are strings, so we need to make them into floats.
+			    	}
 				}
 				
 			case nil:
