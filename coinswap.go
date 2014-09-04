@@ -47,13 +47,13 @@ func Get_coinswap() map[string]float64 {		// Has to start with a capital leter b
     switch marketStats.(type) {
         case map[string]interface{}:	// If json response type is a map with string keys.
         	stats := marketStats.(map[string]interface{})
-                marketname := stats["symbol"].(string) + "-" + stats["exchange"].(string)
+                marketname := stats["exchange"].(string) + "-" + stats["symbol"].(string)
                 return_data[marketname], _ = strconv.ParseFloat(stats["ask"].(string), 64)	// Add a market_name -> ask_price pair to the map that we're returning.
     	case []interface{}:             // if type is an array.
     		rows := marketStats.([]interface{})
     		for _,v := range rows {
                     stats := v.(map[string]interface{})
-                    
+     
                     if stats["exchange"] != nil && stats["symbol"] != nil && stats["ask"] != nil {
                     	marketname := stats["exchange"].(string) + "-" + stats["symbol"].(string)
                     	return_data[marketname], _ = strconv.ParseFloat(stats["ask"].(string), 64)	// Add a market_name -> ask_price pair to the map that we're returning.
