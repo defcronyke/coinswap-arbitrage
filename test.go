@@ -6,16 +6,16 @@ import (
 
 
 func main() {
-    coinswap_data := Get_coinswap()
-    poloniex_data := Get_poloniex()
-    bittrex_data := Get_bittrex()
-    mintpal_data := Get_mintpal()
-    cryptsy_data := Get_cryptsy()
-    
-    _ = Compare(coinswap_data,poloniex_data)
-    _ = Compare(coinswap_data,bittrex_data)
-    _ = Compare(coinswap_data,mintpal_data)
-	_ = Compare(coinswap_data,cryptsy_data)
+//    coinswap_data := Get_coinswap()
+//    poloniex_data := Get_poloniex()
+//    bittrex_data := Get_bittrex()
+//    mintpal_data := Get_mintpal()
+//    cryptsy_data := Get_cryptsy()
+//    
+//    _ = Compare(coinswap_data,poloniex_data)
+//    _ = Compare(coinswap_data,bittrex_data)
+//    _ = Compare(coinswap_data,mintpal_data)
+//	_ = Compare(coinswap_data,cryptsy_data)
 
     
     
@@ -25,6 +25,14 @@ func main() {
     fmt.Printf("Bittrex: %v\n", bittrex_data)
     fmt.Printf("Mintpal: %v\n", mintpal_data)
 */
+    fmt.Printf("Arb Data:\n")	// Example of iterating over the arbitrage_data structure.
+    for market_name, exchanges := range arbitrage_data {
+        fmt.Printf("Market: %v\n", market_name)
+        
+        for exchange, price := range exchanges {
+            fmt.Printf("%v: %.8f\n", exchange, price)
+        }
+    }
 }
 
 func Compare(coinswap,exchange map[string]float64) int {
