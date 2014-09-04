@@ -53,8 +53,11 @@ func Get_coinswap() map[string]float64 {		// Has to start with a capital leter b
     		rows := marketStats.([]interface{})
     		for _,v := range rows {
                     stats := v.(map[string]interface{})
-                    marketname := stats["symbol"].(string) + "-" + stats["exchange"].(string)
-                    return_data[marketname], _ = strconv.ParseFloat(stats["ask"].(string), 64)	// Add a market_name -> ask_price pair to the map that we're returning.
+                    
+                    if stats["exchange"] != nil && stats["symbol"] != nil && stats["ask"] != nil {
+                    	marketname := stats["exchange"].(string) + "-" + stats["symbol"].(string)
+                    	return_data[marketname], _ = strconv.ParseFloat(stats["ask"].(string), 64)	// Add a market_name -> ask_price pair to the map that we're returning.
+                   	}
     		}
     }
     return return_data
