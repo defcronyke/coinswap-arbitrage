@@ -8,8 +8,8 @@ import (
     "crypto/tls"
 )
 
-// returns the golang equivalent of { "market_name": ask_price, ... }
-func Get_bittrex() map[string]float64 {		// Has to start with a capital leter because we are exporting it.
+// returns the golang equivalent of { "market_name": bid_price, ... }
+func Get_bittrex() map[string]float64 {
     tr := &http.Transport{
             TLSClientConfig: &tls.Config{InsecureSkipVerify : true},
     }

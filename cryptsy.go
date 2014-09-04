@@ -10,7 +10,7 @@ import (
     "strings"
 )
 
-// returns the golang equivalent of { "market_name": ask_price, ... }
+// returns the golang equivalent of { "market_name": bid_price, ... }
 func Get_cryptsy() map[string]float64 {
     tr := &http.Transport{
             TLSClientConfig: &tls.Config{InsecureSkipVerify : true},
